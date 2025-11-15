@@ -104,7 +104,7 @@ def green_card_html(text: str):
 # ----------------------------
 # Row 1: Liquidity Score KPIs
 # ----------------------------
-st.header("📌 Liquidity Score Overview (Row 1)")
+st.header("📌 Liquidity Score Overview")
 
 # Highest
 max_liq_val = df["liquidityScore"].max()
@@ -141,7 +141,7 @@ st.markdown("---")
 # ----------------------------
 # Row 2: Velocity Multiplier KPIs
 # ----------------------------
-st.header("📌 Velocity Multiplier Overview (Row 2)")
+st.header("📌 Velocity Multiplier Overview")
 
 max_vel = df["velocityMultiplier"].max()
 max_vel_markets = df[df["velocityMultiplier"] == max_vel]["symbol"].tolist()
@@ -177,7 +177,7 @@ st.markdown("___________________________________________________________________
 # ----------------------------
 # Row 3: Full Liquidity Parameters Table (index from 1)
 # ----------------------------
-st.header("📄 Full Liquidity Parameters Table (Row 3)")
+st.header("📄 Full Liquidity Parameters Table")
 
 df_table = df.copy()
 df_table_display = df_table.reset_index(drop=True)
@@ -189,7 +189,7 @@ st.markdown("___________________________________________________________________
 # ----------------------------
 # Row 4: Market Details Explorer
 # ----------------------------
-st.header("🔍 Market Details Explorer (Row 4)")
+st.header("🔍 Market Details Explorer")
 
 st.markdown(green_card_html("<b>Select a market to inspect full details.</b>"), unsafe_allow_html=True)
 selected_market = st.selectbox("Select a market:", df["symbol"].unique())
@@ -202,7 +202,7 @@ st.markdown("___________________________________________________________________
 # ----------------------------
 # Row 5: Top 10 Most Liquid Markets
 # ----------------------------
-st.header("🏆 Top 10 Most Liquid Markets (Row 5)")
+st.header("🏆 Top 10 Most Liquid Markets")
 
 top10_liquid = df.sort_values("liquidityScore", ascending=False).head(10).copy()
 top10_liquid_display = top10_liquid.reset_index(drop=True)
@@ -214,7 +214,7 @@ st.markdown("___________________________________________________________________
 # ----------------------------
 # Row 6: Top 10 Most Volatile Markets
 # ----------------------------
-st.header("⚡ Top 10 Most Volatile Liquidity Markets (Row 6)")
+st.header("⚡ Top 10 Most Volatile Liquidity Markets")
 
 top10_volatile = df.sort_values("velocityMultiplier", ascending=False).head(10).copy()
 top10_volatile_display = top10_volatile.reset_index(drop=True)
@@ -226,7 +226,7 @@ st.markdown("___________________________________________________________________
 # ----------------------------
 # Row 7: Scatter + Undervalued Markets with label values
 # ----------------------------
-st.header("📊 Depth vs Liquidity Score & Undervalued Markets (Row 7)")
+st.header("📊 Depth vs Liquidity Score & Undervalued Markets")
 
 st.markdown(green_card_html("<b>Left: Depth vs Liquidity Score scatter. Right: Undervalued markets (high depth + low liquidityScore).</b>"), unsafe_allow_html=True)
 
@@ -271,7 +271,7 @@ st.markdown("___________________________________________________________________
 # ----------------------------
 # Row 8: Scatter + High-Risk Table
 # ----------------------------
-st.header("📊 Depth vs Velocity & High-Risk Markets (Row 8)")
+st.header("📊 Depth vs Velocity & High-Risk Markets")
 
 st.markdown(green_card_html("<b>Left: Depth vs Velocity scatter. Right: Top 10 High-Risk markets (depth low + velocity high).</b>"), unsafe_allow_html=True)
 
@@ -305,7 +305,7 @@ st.markdown("___________________________________________________________________
 # ----------------------------
 # Row 10: Radar Chart per market
 # ----------------------------
-st.header("📡 Radar Chart (Row 10) — Select Market")
+st.header("📡 Radar Chart — Select Market")
 
 st.markdown(green_card_html("<b>Select a market to visualize its profile across depth, velocityMultiplier and liquidityScore.</b>"), unsafe_allow_html=True)
 
