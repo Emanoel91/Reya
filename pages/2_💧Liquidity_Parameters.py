@@ -42,7 +42,7 @@ df["undervaluedMetric"] = df.apply(lambda r: (r["depth"] / (r["liquidityScore"] 
 # ----------------------------
 # Streamlit Page Setup
 # ----------------------------
-st.set_page_config(page_title="Reya — Advanced Liquidity Dashboard (Final)", layout="wide")
+
 st.title("💧 Reya — Liquidity Parameters")
 
 # ---------- Helper: green card ----------
