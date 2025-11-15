@@ -1,25 +1,24 @@
 import streamlit as st
 import requests
 import pandas as pd
-import altair as alt
+import plotly.express as px
+import plotly.graph_objects as go
+
 
 # ------------------------------------------------------
-# Fetch Market Definitions from Reya Network API
+# Fetch Market Definitions
 # ------------------------------------------------------
 @st.cache_data(ttl=300)
 def get_market_definitions():
-    """
-    Fetch market definitions from Reya Network API.
-    Cached for 300 seconds to avoid excessive requests.
-    """
+    """Fetch market definitions from Reya Network API."""
     url = "https://api.reya.xyz/v2/marketDefinitions"
     response = requests.get(url)
     return response.json()
 
-data = get_market_definitions()
 
-# Convert JSON to DataFrame
+data = get_market_definitions()
 df = pd.DataFrame(data)
+
 
 # ------------------------------------------------------
 # Streamlit Page Setup
@@ -32,37 +31,38 @@ st.set_page_config(
 st.title("📊 Reya Network — Market Definitions Dashboard")
 
 st.markdown("""
-This dashboard visualizes and explains the **Market Definitions API** data from the **Reya Network**.
-
-You will find:
-- A complete explanation of all API fields  
-- Raw market definition data  
-- Visual analytics and distribution charts  
-- A detailed market inspector  
-- Statistical summaries  
+This dashboard visualizes and explains the **Market Definitions API** from the Reya Network.  
+Explore field definitions, raw market data, charts, and market-level details.
 """)
 
+
 # ------------------------------------------------------
-# Field Explanations (English)
+# Field Descriptions (Card Style)
 # ------------------------------------------------------
 st.header("📘 Field Descriptions")
 
 field_descriptions = {
-    "symbol": "The market symbol (e.g., BTCRUSDPERP for Bitcoin perpetual futures).",
-    "marketId": "A unique numerical identifier assigned to each market.",
-    "minOrderQty": "Minimum order quantity allowed for this market.",
-    "qtyStepSize": "Order quantity increment; orders must be multiples of this value.",
-    "tickSize": "Minimum allowable price change (price tick).",
-    "initialMarginParameter": "Parameter defining how much initial margin is required to open a position.",
-    "liquidationMarginParameter": "Parameter used to calculate liquidation margin level.",
+    "symbol": "Market symbol (e.g., BTCRUSDPERP for Bitcoin perpetual futures).",
+    "marketId": "Unique numerical identifier assigned to each market.",
+    "minOrderQty": "Minimum allowed order quantity.",
+    "qtyStepSize": "Quantity increment; orders must follow this step size.",
+    "tickSize": "Minimum price tick (smallest allowed price movement).",
+    "initialMarginParameter": "Required initial margin parameter when opening a position.",
+    "liquidationMarginParameter": "Margin parameter used to compute liquidation thresholds.",
     "maxLeverage": "Maximum leverage allowed for this market.",
-    "oiCap": "Maximum allowed Open Interest for the market.",
+    "oiCap": "Maximum allowed Open Interest for this market."
 }
 
-for field, desc in field_descriptions.items():
-    st.markdown(f"### 🔹 `{field}`")
-    st.markdown(f"{desc}")
-    st.markdown("---")
+with st.container():
+    st.markdown("""
+    <div style="padding: 20px; border-radius: 10px; border: 1px solid #ccc; background-color: #f9f9f9;">
+        <h4 style="margin-top: 0;">Field Definitions Overview</h4>
+    """, unsafe_allow_html=True)
+
+    for field, desc in field_descriptions.items():
+        st.markdown(f"**`{field}`** — {desc}")
+
+    st.markdown("</div>", unsafe_allow_html=True)
 
 
 # ------------------------------------------------------
@@ -70,48 +70,6 @@ for field, desc in field_descriptions.items():
 # ------------------------------------------------------
 st.header("📄 Full Market Definitions Table")
 st.dataframe(df, use_container_width=True)
-
-
-# ------------------------------------------------------
-# Visualization Section
-# ------------------------------------------------------
-st.header("📊 Visualization & Analytics")
-
-col1, col2 = st.columns(2)
-
-# ------- Tick Size Chart -------
-with col1:
-    st.subheader("📈 Tick Size Distribution")
-    try:
-        df["tickSize"] = pd.to_numeric(df["tickSize"], errors="coerce")
-        chart_tick = (
-            alt.Chart(df)
-            .mark_bar()
-            .encode(
-                x=alt.X("tickSize:Q", title="Tick Size"),
-                y=alt.Y("count()", title="Count"),
-            )
-        )
-        st.altair_chart(chart_tick, use_container_width=True)
-    except:
-        st.warning("Tick Size values are not numeric or are missing.")
-
-# ------- Max Leverage Chart -------
-with col2:
-    st.subheader("📈 Max Leverage Distribution")
-    try:
-        df["maxLeverage"] = pd.to_numeric(df["maxLeverage"], errors="coerce")
-        chart_leverage = (
-            alt.Chart(df)
-            .mark_bar()
-            .encode(
-                x=alt.X("maxLeverage:Q", title="Max Leverage"),
-                y=alt.Y("count()", title="Count"),
-            )
-        )
-        st.altair_chart(chart_leverage, use_container_width=True)
-    except:
-        st.warning("Max Leverage values are not numeric or are missing.")
 
 
 # ------------------------------------------------------
@@ -129,23 +87,46 @@ st.json(selected_row.to_dict())
 
 
 # ------------------------------------------------------
-# Statistical Summary
+# Visualization Section
 # ------------------------------------------------------
-st.header("📊 Summary Statistics")
+st.header("📊 Visual Analytics")
 
-numeric_cols = [
-    "minOrderQty", "qtyStepSize", "tickSize",
-    "initialMarginParameter", "liquidationMarginParameter",
-    "maxLeverage", "oiCap"
-]
+df["maxLeverage"] = pd.to_numeric(df["maxLeverage"], errors="coerce")
 
-df_numeric = df.copy()
 
-# Convert numeric fields
-for col in numeric_cols:
-    df_numeric[col] = pd.to_numeric(df_numeric[col], errors="coerce")
+# ----------------------------------
+# Max Leverage Bar Chart (Plotly)
+# ----------------------------------
+st.subheader("📈 Max Leverage Distribution (Bar Chart)")
 
-st.dataframe(df_numeric.describe(), use_container_width=True)
+bar_fig = px.histogram(
+    df,
+    x="maxLeverage",
+    nbins=20,
+    title="Max Leverage Histogram",
+)
 
-st.markdown("---")
-st.markdown("Dashboard generated with ❤️ for Reya Network developers.")
+st.plotly_chart(bar_fig, use_container_width=True)
+
+
+# ----------------------------------
+# Donut Chart (Based on Max Leverage)
+# ----------------------------------
+st.subheader("🟣 Max Leverage Donut Chart")
+
+# Count frequencies
+leverage_counts = df["maxLeverage"].value_counts().reset_index()
+leverage_counts.columns = ["maxLeverage", "count"]
+
+donut_fig = go.Figure(
+    data=[
+        go.Pie(
+            labels=leverage_counts["maxLeverage"],
+            values=leverage_counts["count"],
+            hole=0.5
+        )
+    ]
+)
+
+donut_fig.update_layout(title_text="Max Leverage Distribution (Donut Chart)")
+st.plotly_chart(donut_fig, use_container_width=True)
