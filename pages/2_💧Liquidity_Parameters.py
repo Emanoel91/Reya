@@ -330,3 +330,16 @@ fig_radar = go.Figure(
 
 st.plotly_chart(fig_radar, use_container_width=True)
 
+# ----------------------------
+# Footer / Notes
+# ----------------------------
+st.markdown("---")
+st.markdown("""
+**Notes & Methodology:**  
+- `stabilityScore = depth / velocityMultiplier` (higher => more stable).  
+- `efficiencyScore = liquidityScore / depth` (approx equals velocityMultiplier where depth>0).  
+- `riskIndex = velocityMultiplier / depth` (higher => more risky).  
+- `undervaluedMetric = depth / liquidityScore` (higher => more depth relative to liquidityScore).  
+- `attractivenessIndex` uses the global variance of liquidityScore to normalize; if variance is zero a fallback is applied.  
+- Table indices shown in this dashboard start from 1 as requested.
+""")
