@@ -110,7 +110,7 @@ col_bar, col_donut = st.columns(2)
 
 # -------- Column Bar Chart (Max Leverage Distribution) --------
 with col_bar:
-    st.subheader("📈 Max Leverage Distribution (Column Chart)")
+# --    st.subheader("📈 Max Leverage Distribution (Column Chart)")
     bar_fig = px.bar(
         leverage_counts,
         x="maxLeverage",
@@ -123,7 +123,7 @@ with col_bar:
 
 # -------- Donut Chart (Max Leverage) --------
 with col_donut:
-    st.subheader("🟣 Max Leverage Distribution (Donut Chart)")
+# --    st.subheader("🟣 Max Leverage Distribution (Donut Chart)")
     donut_fig = go.Figure(
         data=[
             go.Pie(
