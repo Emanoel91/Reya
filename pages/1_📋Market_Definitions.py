@@ -37,7 +37,7 @@ st.set_page_config(
 st.title("📊 Reya Network")
 
 st.markdown("""
-This dashboard visualizes and explains the **Market Definitions API** from the Reya Network.  
+This dashboard visualizes and explains the **Market Definitions API**.  
 Explore field definitions, raw market data, visual analytics, and detailed information for each market.
 """)
 
