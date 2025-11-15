@@ -53,12 +53,6 @@ field_descriptions = {
     "oiCap": "Maximum allowed Open Interest for this market."
 }
 
-    for field, desc in field_descriptions.items():
-        st.markdown(f"**`{field}`** — {desc}")
-
-    st.markdown("</div>", unsafe_allow_html=True)
-
-
 # ------------------------------------------------------
 # Display Raw Data Table
 # ------------------------------------------------------
