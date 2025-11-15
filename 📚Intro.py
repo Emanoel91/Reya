@@ -88,8 +88,8 @@ st.markdown(
     """
     <div style="margin-top: 20px; margin-bottom: 20px; font-size: 16px;">
         <div style="display: flex; align-items: center; gap: 10px;">
-            <img src="https://pbs.twimg.com/profile_images/1856738793325268992/OouKI10c_400x400.jpg" alt="Flipside" style="width:25px; height:25px; border-radius: 50%;">
-            <span>Data Powered by: <a href="https://flipsidecrypto.xyz/home/" target="_blank">Flipside</a></span>
+            <img src="https://img.cryptorank.io/coins/reya_labs_voltz1733895726081.png" alt="REYA" style="width:25px; height:25px; border-radius: 50%;">
+            <span>Data Powered by: <a href="https://docs.reya.xyz/developers" target="_blank">Reya API</a></span>
         </div>
     </div>
     """,
@@ -101,12 +101,12 @@ st.markdown(
     """
     <div style="font-size: 16px;">
         <div style="display: flex; align-items: center; gap: 10px;">
-            <img src="https://axelarscan.io/logos/logo.png" alt="Axelar" style="width:20px; height:20px;">
-            <a href="https://www.axelar.network/" target="_blank">Axelar Website</a>
+            <img src="https://img.cryptorank.io/coins/reya_labs_voltz1733895726081.png" alt="reya" style="width:20px; height:20px;">
+            <a href="https://reya.xyz/" target="_blank">Reya Website</a>
         </div>
         <div style="display: flex; align-items: center; gap: 10px;">
-            <img src="https://axelarscan.io/logos/logo.png" alt="X" style="width:20px; height:20px;">
-            <a href="https://x.com/axelar" target="_blank">Axelar X Account</a>
+            <img src="https://img.cryptorank.io/coins/reya_labs_voltz1733895726081.png" alt="Reya X" style="width:20px; height:20px;">
+            <a href="https://x.com/Reya_xyz" target="_blank">Reya X Account</a>
         </div>
     </div>
     """,
