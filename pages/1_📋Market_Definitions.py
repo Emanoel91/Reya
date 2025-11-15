@@ -53,6 +53,10 @@ field_descriptions = {
     "oiCap": "Maximum allowed Open Interest for this market."
 }
 
+
+
+    st.markdown("</div>", unsafe_allow_html=True)
+
 # ------------------------------------------------------
 # Display Raw Data Table
 # ------------------------------------------------------
