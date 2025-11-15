@@ -31,7 +31,16 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+st.markdown("""
+This dashboard visualizes and explains the **Market Definitions API** data from the **Reya Network**.
 
+You will find:
+- A complete explanation of all API fields  
+- Raw market definition data  
+- Visual analytics and distribution charts  
+- A detailed market inspector  
+- Statistical summaries  
+""")
 # --- Reference and Rebuild Info ---
 st.markdown(
     """
