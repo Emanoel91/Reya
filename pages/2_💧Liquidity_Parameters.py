@@ -7,7 +7,7 @@ import plotly.graph_objects as go
 
 # --- Page Config ------------------------------------------------------------------------------------------------------
 st.set_page_config(
-    page_title="Reya",
+    page_title="Reya — Liquidity Parameters",
     page_icon="https://img.cryptorank.io/coins/reya_labs_voltz1733895726081.png",
     layout="wide"
 )
