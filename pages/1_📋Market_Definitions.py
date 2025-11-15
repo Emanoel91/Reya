@@ -69,7 +69,39 @@ field_block_html = """
 
 st.markdown(field_block_html, unsafe_allow_html=True)
 
+# ------------------------------------------------------
+# KPI SECTION (Above Table)
+# ------------------------------------------------------
+st.header("📌 Key Performance Indicators (KPIs)")
 
+# Convert for numeric processing
+df["maxLeverage"] = pd.to_numeric(df["maxLeverage"], errors="coerce")
+
+# KPI 1 – Total Markets
+total_markets = df["symbol"].nunique()
+
+# KPI 2 – Max leverage
+max_leverage_value = df["maxLeverage"].max()
+
+# Markets offering max leverage
+markets_with_max = df[df["maxLeverage"] == max_leverage_value]["symbol"].tolist()
+markets_with_max_str = ", ".join(markets_with_max)
+
+# Display KPIs in 2 columns
+k1, k2 = st.columns(2)
+
+with k1:
+    st.metric(
+        label="Total Markets Listed",
+        value=total_markets
+    )
+
+with k2:
+    st.metric(
+        label="Maximum Leverage Offered",
+        value=max_leverage_value,
+        delta=f"Markets: {markets_with_max_str}"
+    )
 # ------------------------------------------------------
 # Display Raw Data Table
 # ------------------------------------------------------
