@@ -104,7 +104,7 @@ def green_card_html(text: str):
 # ----------------------------
 # Row 1: Liquidity Score KPIs
 # ----------------------------
-st.header("📌 Liquidity Score Overview")
+st.header("⭐ Liquidity Score Overview")
 
 # Highest
 max_liq_val = df["liquidityScore"].max()
@@ -141,7 +141,7 @@ st.markdown("---")
 # ----------------------------
 # Row 2: Velocity Multiplier KPIs
 # ----------------------------
-st.header("📌 Velocity Multiplier Overview")
+st.header("✨ Velocity Multiplier Overview")
 
 max_vel = df["velocityMultiplier"].max()
 max_vel_markets = df[df["velocityMultiplier"] == max_vel]["symbol"].tolist()
