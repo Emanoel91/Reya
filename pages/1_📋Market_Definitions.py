@@ -29,7 +29,7 @@ st.set_page_config(
     layout="wide"
 )
 
-st.title("📊 Reya Network — Market Definitions Dashboard")
+st.title("📊 Reya Network")
 
 st.markdown("""
 This dashboard visualizes and explains the **Market Definitions API** from the Reya Network.  
