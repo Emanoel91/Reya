@@ -9,7 +9,49 @@ import plotly.graph_objects as go
 st.set_page_config(
     page_title="Reya — Liquidity Parameters",
     page_icon="https://img.cryptorank.io/coins/reya_labs_voltz1733895726081.png",
-    layout="wide"
+    layout="wide")
+# --- Sidebar Footer Slightly Left-Aligned ---------------------------------------------------------------------
+st.sidebar.markdown(
+    """
+    <style>
+    .sidebar-footer {
+        position: fixed;
+        bottom: 20px;
+        width: 250px;
+        font-size: 13px;
+        color: gray;
+        margin-left: 5px; 
+        text-align: left;  
+    }
+    .sidebar-footer img {
+        width: 16px;
+        height: 16px;
+        vertical-align: middle;
+        border-radius: 50%;
+        margin-right: 5px;
+    }
+    .sidebar-footer a {
+        color: gray;
+        text-decoration: none;
+    }
+    </style>
+
+    <div class="sidebar-footer">
+        <div>
+            <a href="https://x.com/Reya_xyz" target="_blank">
+                <img src="https://img.cryptorank.io/coins/reya_labs_voltz1733895726081.png" alt="Reya Logo">
+                Powered by Reya
+            </a>
+        </div>
+        <div style="margin-top: 5px;">
+            <a href="https://x.com/0xeman_raz" target="_blank">
+                <img src="https://pbs.twimg.com/profile_images/1841479747332608000/bindDGZQ_400x400.jpg" alt="Eman Raz">
+                Built by Eman Raz
+            </a>
+        </div>
+    </div>
+    """,
+    unsafe_allow_html=True
 )
 # ----------------------------
 # Fetch Liquidity Parameters
