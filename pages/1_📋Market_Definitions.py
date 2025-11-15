@@ -30,7 +30,7 @@ df = pd.DataFrame(data)
 # Streamlit Page Setup
 # ------------------------------------------------------
 st.set_page_config(
-    page_title="Reya Network Market Definitions Dashboard",
+    page_title="Reya",
     layout="wide"
 )
 
