@@ -275,7 +275,7 @@ row1_col1, row1_col2 = st.columns(2)
 
 # ---------- Row 1 - Left ----------
 with row1_col1:
-    st.subheader("📈 Open Interest by Market (Total & Breakdown)")
+    st.markdown("<h3 style='font-size:15px;'>📈 Open Interest by Market (Total & Breakdown)</h3>", unsafe_allow_html=True)
 
     oi_plot = df[["symbol", "longOiQty", "shortOiQty", "oiQty"]].copy().fillna(0)
     oi_plot = oi_plot.sort_values("oiQty", ascending=False).head(40)
