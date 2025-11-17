@@ -271,58 +271,78 @@ else:
 # -------------------------
 st.markdown("---")
 st.header("📊 Visual Analytics")
-
+# -------------------------------------------------------------------------------
 # Column layout for multiple charts
-col1, col2 = st.columns((2, 1))
+# ====== Row 1 ======
+row1_col1, row1_col2 = st.columns(2)
 
-# Left column: OI bar + stacked long/short OI
-with col1:
+# ---------- Row 1 - Left ----------
+with row1_col1:
     st.subheader("📈 Open Interest by Market (Total & Breakdown)")
-    # prepare DF for stacked chart
+
     oi_plot = df[["symbol", "longOiQty", "shortOiQty", "oiQty"]].copy().fillna(0)
-    oi_plot = oi_plot.sort_values("oiQty", ascending=False).head(40)  # limit to top 40 for readability
+    oi_plot = oi_plot.sort_values("oiQty", ascending=False).head(40)
+
     if not oi_plot.empty:
         fig_oi_stack = go.Figure()
-        fig_oi_stack.add_trace(go.Bar(
-            x=oi_plot["symbol"], y=oi_plot["longOiQty"], name="Long OI"
-        ))
-        fig_oi_stack.add_trace(go.Bar(
-            x=oi_plot["symbol"], y=oi_plot["shortOiQty"], name="Short OI"
-        ))
-        fig_oi_stack.update_layout(barmode="stack", xaxis_tickangle=-45, height=450,
-                                   title="Long vs Short Open Interest (stacked) - top markets by OI")
+        fig_oi_stack.add_trace(go.Bar(x=oi_plot["symbol"], y=oi_plot["longOiQty"], name="Long OI"))
+        fig_oi_stack.add_trace(go.Bar(x=oi_plot["symbol"], y=oi_plot["shortOiQty"], name="Short OI"))
+        fig_oi_stack.update_layout(
+            barmode="stack",
+            xaxis_tickangle=-45,
+            height=450,
+            title="Long vs Short Open Interest (stacked)"
+        )
         st.plotly_chart(fig_oi_stack, use_container_width=True)
     else:
         st.write("No open interest data to plot.")
 
-# --    st.subheader("📉 Funding Rate Distribution")
+# ---------- Row 1 - Right ----------
+with row1_col2:
+    st.subheader("📉 Funding Rate Distribution")
+
     if "fundingRate" in df.columns and not df["fundingRate"].isna().all():
-        fig_fund_hist = px.histogram(df, x="fundingRate", nbins=40, title="Funding Rate Distribution")
+        fig_fund_hist = px.histogram(df, x="fundingRate", nbins=40,
+                                     title="Funding Rate Distribution")
         fig_fund_hist.update_layout(height=350)
         st.plotly_chart(fig_fund_hist, use_container_width=True)
     else:
         st.write("Funding rate data not available.")
 
-# Right column: Donut, funding velocity bar, scatter
-with col2:
+
+# ====== Row 2 ======
+row2_col1, row2_col2 = st.columns(2)
+
+# ---------- Row 2 - Left ----------
+with row2_col1:
     st.subheader("🟣 Long vs Short OI (Network)")
+
     total_long = total_long_oi if not np.isnan(total_long_oi) else 0
     total_short = total_short_oi if not np.isnan(total_short_oi) else 0
-    fig_donut = go.Figure(data=[go.Pie(labels=["Long OI", "Short OI"],
-                                       values=[total_long, total_short],
-                                       hole=0.5)])
-    fig_donut.update_layout(title_text="Network Long vs Short OI", height=350)
+
+    fig_donut = go.Figure(data=[
+        go.Pie(labels=["Long OI", "Short OI"], values=[total_long, total_short], hole=0.5)
+    ])
+    fig_donut.update_layout(title="Network Long vs Short OI", height=350)
     st.plotly_chart(fig_donut, use_container_width=True)
 
-# --    st.subheader("⚡ Funding Rate Velocity (per Market)")
+# ---------- Row 2 - Right ----------
+with row2_col2:
+    st.subheader("⚡ Funding Rate Velocity (per Market)")
+
     if "fundingRateVelocity" in df.columns and not df["fundingRateVelocity"].isna().all():
-        fv = df[["symbol", "fundingRateVelocity"]].sort_values("fundingRateVelocity", ascending=False).head(30)
-        fig_fv = px.bar(fv, x="symbol", y="fundingRateVelocity", title="Funding Rate Velocity (top 30)")
+        fv = df[["symbol", "fundingRateVelocity"]].sort_values(
+            "fundingRateVelocity", ascending=False
+        ).head(30)
+
+        fig_fv = px.bar(fv, x="symbol", y="fundingRateVelocity",
+                        title="Funding Rate Velocity (top 30)")
         fig_fv.update_layout(xaxis_tickangle=-45, height=300)
         st.plotly_chart(fig_fv, use_container_width=True)
     else:
         st.write("Funding rate velocity not available.")
 
+# -------------------------------------------------------------------------------------------------------------------
 st.markdown("---")
 
 # Lower row: scatter and price divergence bar
