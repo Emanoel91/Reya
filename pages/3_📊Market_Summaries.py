@@ -295,7 +295,7 @@ with col1:
     else:
         st.write("No open interest data to plot.")
 
-    st.subheader("📉 Funding Rate Distribution")
+# --    st.subheader("📉 Funding Rate Distribution")
     if "fundingRate" in df.columns and not df["fundingRate"].isna().all():
         fig_fund_hist = px.histogram(df, x="fundingRate", nbins=40, title="Funding Rate Distribution")
         fig_fund_hist.update_layout(height=350)
@@ -314,7 +314,7 @@ with col2:
     fig_donut.update_layout(title_text="Network Long vs Short OI", height=350)
     st.plotly_chart(fig_donut, use_container_width=True)
 
-    st.subheader("⚡ Funding Rate Velocity (per Market)")
+# --    st.subheader("⚡ Funding Rate Velocity (per Market)")
     if "fundingRateVelocity" in df.columns and not df["fundingRateVelocity"].isna().all():
         fv = df[["symbol", "fundingRateVelocity"]].sort_values("fundingRateVelocity", ascending=False).head(30)
         fig_fv = px.bar(fv, x="symbol", y="fundingRateVelocity", title="Funding Rate Velocity (top 30)")
