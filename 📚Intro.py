@@ -77,7 +77,7 @@ st.markdown(
 # --- Info Box --------------------------------------------------------------------------------------------------------------
 st.markdown(
     """
-    <div style="background-color: #d9fd51; padding: 10px; border-radius: 1px; border: 1px solid #000000;">
+    <div style="background-color: #4bff99; padding: 10px; border-radius: 1px; border: 1px solid #000000;">
         <b>Reya</b> is a breakthrough high-performance onchain exchange that delivers <b>institutional grade execution</b>, whilst delivering superior 
         <b>speed</b>, <b>security</b> and <b>reliability</b> guarantees to users. Reya achieves this as a novel <b>trading-specific based Zk rollup</b> on Ethereum. 
         This design gives users superior:
