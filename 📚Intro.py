@@ -73,17 +73,26 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-st.markdown("""
-This dashboard visualizes and explains the **Market Definitions API** data from the **Reya Network**.
 
-You will find:
-- A complete explanation of all API fields  
-- Raw market definition data  
-- Visual analytics and distribution charts  
-- A detailed market inspector  
-- Statistical summaries  
-""")
-# --- Reference and Rebuild Info ---
+# --- Info Box --------------------------------------------------------------------------------------------------------------
+st.markdown(
+    """
+    <div style="background-color: #d9fd51; padding: 10px; border-radius: 1px; border: 1px solid #000000;">
+        <b>Reya</b> is a breakthrough high-performance onchain exchange that delivers <b>institutional grade execution</b>, whilst delivering superior 
+        <b>speed</b>, <b>security</b> and <b>reliability</b> guarantees to users. Reya achieves this as a novel <b>trading-specific based Zk rollup</b> on Ethereum. 
+        This design gives users superior:
+        <br><br>
+        🔸 <b>Speed</b>: &lt;1ms trade execution<br>
+        🔸 <b>Security</b>: verifiable order execution and settlement, via zk-proofs, with executed trades settling on Ethereum<br>
+        🔸 <b>Reliability</b>: no single point of failure, with the rollup design having multiple rotating L2 nodes (unlike generation-1 rollups)<br><br>
+        The based-design also makes Reya <b>synchronously composable</b> with all of <b>Ethereum L1 DeFi</b>, unlocking novel use cases for traders and builders. 
+        No sidecar. No Alt-L1. Instead, a <b>DEX enshrined into the Ethereum L1</b>.
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
+# --- Reference and Rebuild Info -------------------------------------------------------------------------------------------
 st.markdown(
     """
     <div style="margin-top: 20px; margin-bottom: 20px; font-size: 16px;">
