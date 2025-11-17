@@ -268,9 +268,6 @@ else:
 
 # -------------------------
 # Charts / Visual Analytics
-# -------------------------
-st.markdown("---")
-st.header("📊 Visual Analytics")
 # -------------------------------------------------------------------------------
 # Column layout for multiple charts
 # ====== Row 1 ======
@@ -343,8 +340,6 @@ with row2_col2:
         st.write("Funding rate velocity not available.")
 
 # -------------------------------------------------------------------------------------------------------------------
-st.markdown("---")
-
 # Lower row: scatter and price divergence bar
 col3, col4 = st.columns(2)
 
@@ -382,7 +377,6 @@ with col4:
 # -------------------------
 # Market Explorer (detailed view)
 # -------------------------
-st.markdown("---")
 st.header("🔍 Market Details Explorer")
 
 symbols = df["symbol"].dropna().unique().tolist()
