@@ -296,7 +296,7 @@ with row1_col1:
 
 # ---------- Row 1 - Right ----------
 with row1_col2:
-    st.subheader("📉 Funding Rate Distribution")
+    st.markdown("<h3 style='font-size:25px;'>📉 Funding Rate Distribution</h3>", unsafe_allow_html=True)
 
     if "fundingRate" in df.columns and not df["fundingRate"].isna().all():
         fig_fund_hist = px.histogram(df, x="fundingRate", nbins=40,
