@@ -296,7 +296,7 @@ with row1_col1:
 
 # ---------- Row 1 - Right ----------
 with row1_col2:
-    st.markdown("<h3 style='font-size:25px;'>📉 Funding Rate Distribution</h3>", unsafe_allow_html=True)
+    st.markdown("<h3 style='font-size:25px;'>💰 Funding Rate Distribution</h3>", unsafe_allow_html=True)
 
     if "fundingRate" in df.columns and not df["fundingRate"].isna().all():
         fig_fund_hist = px.histogram(df, x="fundingRate", nbins=40,
@@ -312,7 +312,8 @@ row2_col1, row2_col2 = st.columns(2)
 
 # ---------- Row 2 - Left ----------
 with row2_col1:
-    st.subheader("🟣 Long vs Short OI (Network)")
+    
+    st.markdown("<h3 style='font-size:25px;'>⚖️ Long vs Short OI (Network)</h3>", unsafe_allow_html=True)
 
     total_long = total_long_oi if not np.isnan(total_long_oi) else 0
     total_short = total_short_oi if not np.isnan(total_short_oi) else 0
@@ -325,7 +326,7 @@ with row2_col1:
 
 # ---------- Row 2 - Right ----------
 with row2_col2:
-    st.subheader("⚡ Funding Rate Velocity (per Market)")
+    st.markdown("<h3 style='font-size:25px;'>⚡ Funding Rate Velocity (per Market)</h3>", unsafe_allow_html=True)
 
     if "fundingRateVelocity" in df.columns and not df["fundingRateVelocity"].isna().all():
         fv = df[["symbol", "fundingRateVelocity"]].sort_values(
@@ -344,7 +345,7 @@ with row2_col2:
 col3, col4 = st.columns(2)
 
 with col3:
-    st.subheader("🔎 Volume vs 24h Price Change (bubble: OI size)")
+    st.markdown("<h3 style='font-size:20px;'>🔎 Volume vs 24h Price Change (bubble: OI size)</h3>", unsafe_allow_html=True)
     if "volume24h" in df.columns and "pxChange24h" in df.columns:
         scatter_df = df.dropna(subset=["volume24h", "pxChange24h"])
         if not scatter_df.empty:
@@ -365,7 +366,7 @@ with col3:
         st.write("Volume or pxChange data not available.")
 
 with col4:
-    st.subheader("🔺 Price Divergence by Market (abs(pool - oracle))")
+    st.markdown("<h3 style='font-size:20px;'>🔺 Price Divergence by Market (abs(pool - oracle))</h3>", unsafe_allow_html=True)
     if "absPriceSpread" in df.columns and not df["absPriceSpread"].isna().all():
         pdv = df[["symbol", "absPriceSpread"]].sort_values("absPriceSpread", ascending=False).head(40)
         fig_div = px.bar(pdv, x="symbol", y="absPriceSpread", title="Absolute Price Spread (top 40)")
