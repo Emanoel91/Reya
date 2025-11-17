@@ -304,7 +304,7 @@ with row1_col2:
     if "fundingRate" in df.columns and not df["fundingRate"].isna().all():
         fig_fund_hist = px.histogram(df, x="fundingRate", nbins=40,
                                      title="Funding Rate Distribution")
-        fig_fund_hist.update_layout(height=350)
+        fig_fund_hist.update_layout(height=450)
         st.plotly_chart(fig_fund_hist, use_container_width=True)
     else:
         st.write("Funding rate data not available.")
