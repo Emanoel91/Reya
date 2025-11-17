@@ -323,7 +323,7 @@ with row2_col1:
     fig_donut = go.Figure(data=[
         go.Pie(labels=["Long OI", "Short OI"], values=[total_long, total_short], hole=0.5)
     ])
-    fig_donut.update_layout(title="Network Long vs Short OI", height=350)
+    fig_donut.update_layout(title="Network Long vs Short OI", height=400)
     st.plotly_chart(fig_donut, use_container_width=True)
 
 # ---------- Row 2 - Right ----------
@@ -337,7 +337,7 @@ with row2_col2:
 
         fig_fv = px.bar(fv, x="symbol", y="fundingRateVelocity",
                         title="Funding Rate Velocity (top 30)")
-        fig_fv.update_layout(xaxis_tickangle=-45, height=300)
+        fig_fv.update_layout(xaxis_tickangle=-45, height=400)
         st.plotly_chart(fig_fv, use_container_width=True)
     else:
         st.write("Funding rate velocity not available.")
